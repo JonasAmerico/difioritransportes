@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di Fiori Transportes - Sua Carga no Destino Certo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset básico e variáveis */
+        :root {
+            --primary-color: #0056b3; /* Azul Di Fiori */
+            --secondary-color: #003d7a; /* Azul mais escuro */
+            --accent-color: #ffcc00; /* Amarelo (opcional, para destaque) */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --white: #fff;
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            scroll-behavior: smooth; /* Para rolagem suave do menu */
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Remove espaço extra abaixo da imagem */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cabeçalho */
+        .header {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Para responsividade */
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--white);
+            margin-right: 20px;
+            flex-shrink: 0; /* Impede que o logo diminua */
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap; /* Para responsividade */
+            justify-content: center;
+        }
+
+        .nav a {
+            color: var(--white);
+            font-weight: 400;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: var(--accent-color);
+        }
+
+        /* Seção Hero (Primeira Dobra) */
+        .hero {
+            background: url('https://via.placeholder.com/1500x600/003d7a/ffffff?text=Di+Fiori+Transportes') no-repeat center center/cover; /* Imagem de fundo de exemplo */
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Overlay escuro */
+            z-index: 1;
+        }
+
+        .hero * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            max-width: 800px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #e6b800; /* Tom mais escuro do amarelo */
+            transform: translateY(-2px);
+        }
+
+        /* Seções Gerais */
+        .section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .section:nth-of-type(even) { /* Para alternar cores de fundo */
+            background-color: var(--light-bg);
+        }
+
+        .section:nth-of-type(odd) {
+            background-color: var(--white);
+        }
+
+        .section h2 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .section p {
+            font-size: 1.1em;
+            max-width: 900px;
+            margin: 0 auto 20px;
+            line-height: 1.8;
+        }
+
+        /* Seção Clientes */
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            justify-items: center;
+            align-items: center;
+        }
+
+        .client-logo {
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            width: 100%;
+            max-width: 200px; /* Limita o tamanho do logo */
+            height: 100px; /* Altura fixa para alinhar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Garante que a imagem não vaze */
+        }
+
+        .client-logo img {
+            max-height: 80%; /* Para que o logo caiba */
+            max-width: 90%;
+            filter: grayscale(80%); /* Para uniformizar os logos */
+            opacity: 0.8;
+            transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+
+        .client-logo:hover {
+            transform: translateY(-5px);
+        }
+        .client-logo:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* Seção Contato Simplificada */
+        .contact-content {
+            display: flex;
+            flex-direction: column; /* Altera para coluna no mobile/simplificado */
+            align-items: center; /* Centraliza os itens */
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 600px; /* Limita a largura para melhor leitura */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2em;
+            color: var(--text-color);
+            text-align: left; /* Alinha o texto à esquerda dentro do item */
+            width: 100%; /* Ocupa a largura total do container */
+            justify-content: flex-start; /* Alinha ícone e texto à esquerda */
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            min-width: 30px; /* Garante que o ícone tenha espaço */
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%; /* Ocupa a largura total */
+        }
+
+        .social-links a {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Rodapé */
+        .footer {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9em;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .section h2 {
+                font-size: 2.2em;
+            }
+
+            .contact-content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 80px 15px;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9em;
+            }
+            .section h2 {
+                font-size: 1.8em;
+            }
+            .client-logo {
+                max-width: 150px;
+                height: 80px;
+            }
+            .contact-item {
+                font-size: 1em;
+            }
+            .contact-item i {
+                font-size: 1.3em;
+            }
+            .social-links a {
+                font-size: 1.5em;
+                margin: 0 8px;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="#hero" class="logo">Di Fiori<span>.</span></a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#hero">Início</a></li>
+                    <li><a href="#sobre">Sobre a Empresa</a></li>
+                    <li><a href="#missao">Missão</a></li>
+                    <li><a href="#clientes">Clientes</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <h1>Di Fiori Transportes: Sua Carga no Destino Certo</h1>
+            <p>Confiabilidade, Agilidade e Segurança em Cada Entrega. Soluções logísticas completas para o seu negócio.</p>
+            <a href="#contato" class="btn">Fale Conosco</a>
+        </section>
+
+        <section id="sobre" class="section">
+            <div class="container">
+                <h2>Sobre a Di Fiori Transportes</h2>
+                <p>A **Di Fiori Transportes** nasceu com o propósito de redefinir a excelência em logística e transporte de cargas. Com uma trajetória de sucesso construída sobre pilares de **confiança, inovação e dedicação**, nos tornamos referência no mercado por nossa capacidade de superar desafios e entregar resultados.</p>
+                <p>Nossa equipe é formada por profissionais experientes e apaixonados pelo que fazem, sempre prontos para oferecer soluções personalizadas que atendam às necessidades específicas de cada cliente. Investimos continuamente em **tecnologia de ponta** e em uma frota moderna e diversificada, garantindo a **segurança e a pontualidade** em todas as etapas do processo. Atendemos diversas regiões, transportando uma ampla gama de produtos, com o cuidado e a precisão que sua carga merece.</p>
+            </div>
+        </section>
+
+        <section id="missao" class="section">
+            <div class="container">
+                <h2>Nossa Missão</h2>
+                <p>Nossa missão na Di Fiori Transportes é oferecer soluções logísticas eficientes e seguras, superando as expectativas de nossos clientes através de um serviço de excelência, inovação contínua e compromisso com a pontualidade e integridade das cargas.</p>
+                <p>Visamos ser a transportadora de referência no mercado, reconhecida pela **qualidade, inovação e sustentabilidade** de seus serviços. Nossos valores fundamentais são **Segurança, Pontualidade, Transparência, Respeito** e a busca constante pela **Inovação**.</p>
+            </div>
+        </section>
+
+        <section id="clientes" class="section">
+            <div class="container">
+                <h2>Nossos Clientes e Parceiros</h2>
+                <p>Temos orgulho de construir relacionamentos sólidos e duradouros com nossos clientes. A confiança depositada em nossos serviços é o que nos impulsiona a buscar a melhoria contínua e a excelência em cada operação.</p>
+                <div class="clients-grid">
+                    <div class="client-logo"><img src="https://via.placeholder.com/150x80?text=Cliente+A" alt="Logo Cliente A"></div>
+                    <div class="client-logo"><img src="https://via.placeholder.com/150x80?text=Cliente+B" alt="Logo Cliente B"></div>
+                    <div class="client-logo"><img src="https://via.placeholder.com/150x80?text=Cliente+C" alt="Logo Cliente C"></div>
+                    <div class="client-logo"><img src="https://via.placeholder.com/150x80?text=Cliente+D" alt="Logo Cliente D"></div>
+                    <div class="client-logo"><img src="https://via.placeholder.com/150x80?text=Cliente+E" alt="Logo Cliente E"></div>
+                    <div class="client-logo"><img src="https://via.placeholder.com/150x80?text=Cliente+F" alt="Logo Cliente F"></div>
+                </div>
+                <p style="margin-top: 40px; font-style: italic;">"A Di Fiori sempre entregou nossas mercadorias com agilidade e segurança, superando nossas expectativas. Recomendo!"<br> - Gerente de Logística, Indústria XYZ</p>
+            </div>
+        </section>
+
+        <section id="contato" class="section">
+            <div class="container">
+                <h2>Fale Conosco</h2>
+                <p>Entre em contato com a equipe Di Fiori. Estamos prontos para atender você e oferecer as melhores soluções para o transporte da sua carga!</p>
+                <div class="contact-content">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Telefones: <a href="tel:+5511987654321">(11) 98765-4321</a> | <a href="tel:+551133334444">(11) 3333-4444</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>E-mail: <a href="mailto:contato@difiori.com.br">contato@difiori.com.br</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Endereço: Rua das Transportadoras, 123 - Bairro Logístico - São Paulo, SP</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Horário de Atendimento: Seg. a Sex., das 8h às 18h</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" target="_blank" title="Facebook Di Fiori"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Instagram Di Fiori"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="LinkedIn Di Fiori"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Di Fiori Transportes. Todos os direitos reservados.</p>
+            <p>Desenvolvido com <i class="fas fa-heart" style="color: red;"></i> e dedicação.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script para rolagem suave da navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    // Ajusta para o cabeçalho fixo (offset)
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    window.scrollTo({
+                        top: targetElement.offsetTop - headerHeight - 10, // Adiciona um pequeno padding
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Opcional: Adicionar classe 'active' ao item do menu conforme a rolagem
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav ul li a');
+            const headerHeight = document.querySelector('.header').offsetHeight;
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - headerHeight - 20; // Ajuste para a altura do cabeçalho
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
